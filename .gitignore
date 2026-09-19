@@ -1,20 +1,23 @@
 # ---- Python / FastAPI ----
+# Anchored to repo root: unqualified names like lib/, build/, dist/ would
+# otherwise also match legitimate source directories in frontend/ (e.g.
+# frontend/src/lib).
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-build/
+/build/
 develop-eggs/
-dist/
-downloads/
+/dist/
+/downloads/
 eggs/
 .eggs/
-lib/
-lib64/
-parts/
+/lib/
+/lib64/
+/parts/
 sdist/
-var/
+/var/
 wheels/
 *.egg-info/
 .installed.cfg
