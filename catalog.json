@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Mutual Non-Disclosure Agreement",
+    "description": "Common Paper's standard Mutual NDA, covering confidentiality obligations and exceptions between two parties evaluating a business relationship. Consists of Standard Terms incorporated by reference into a signed Cover Page.",
+    "filename": "Mutual-NDA.md",
+    "source_repo": "https://github.com/CommonPaper/Mutual-NDA"
+  },
+  {
+    "name": "Mutual Non-Disclosure Agreement - Cover Page",
+    "description": "Cover Page for the Common Paper Mutual NDA. Captures the deal-specific terms (purpose, effective date, term, confidentiality period) that incorporate the Standard Terms by reference to complete an executed MNDA.",
+    "filename": "Mutual-NDA-coverpage.md",
+    "source_repo": "https://github.com/CommonPaper/Mutual-NDA"
+  },
+  {
+    "name": "Cloud Service Agreement",
+    "description": "Common Paper's standard Cloud Service Agreement (CSA) for SaaS/cloud providers, covering service access and use, support, restrictions, fees, confidentiality, warranties, liability, and termination.",
+    "filename": "CSA.md",
+    "source_repo": "https://github.com/CommonPaper/CSA"
+  },
+  {
+    "name": "Design Partner Agreement",
+    "description": "Common Paper's standard Design Partner Agreement, governing early access to a product in exchange for structured customer feedback during a design partner program.",
+    "filename": "design-partner-agreement.md",
+    "source_repo": "https://github.com/CommonPaper/Design-Partner-Agreement"
+  },
+  {
+    "name": "Service Level Agreement",
+    "description": "Common Paper's standard Service Level Agreement (SLA), defining uptime targets, support response times, availability calculations, and service credit remedies for cloud service outages.",
+    "filename": "sla.md",
+    "source_repo": "https://github.com/CommonPaper/SLA"
+  },
+  {
+    "name": "Professional Services Agreement",
+    "description": "Common Paper's standard Professional Services Agreement (PSA), covering statements of work, deliverables, acceptance, change orders, intellectual property assignment, and subcontractor obligations.",
+    "filename": "psa.md",
+    "source_repo": "https://github.com/CommonPaper/PSA"
+  },
+  {
+    "name": "Data Processing Agreement",
+    "description": "Common Paper's standard Data Processing Agreement (DPA), addressing processor/subprocessor relationships, processing instructions, security safeguards, and data subject rights under data protection law.",
+    "filename": "DPA.md",
+    "source_repo": "https://github.com/CommonPaper/DPA"
+  },
+  {
+    "name": "Software License Agreement",
+    "description": "Common Paper's standard Software License Agreement, covering on-premises/installed software licensing, permitted use, open source components, updates, restrictions, and reservation of rights.",
+    "filename": "Software-License-Agreement.md",
+    "source_repo": "https://github.com/CommonPaper/Software-License-Agreement"
+  },
+  {
+    "name": "Partnership Agreement",
+    "description": "Common Paper's standard Partnership Agreement, covering mutual obligations, fees, trademark licensing, and cooperation terms between business partners.",
+    "filename": "Partnership-Agreement.md",
+    "source_repo": "https://github.com/CommonPaper/Partnership-Agreement"
+  },
+  {
+    "name": "Business Associate Agreement",
+    "description": "Common Paper's standard Business Associate Agreement (BAA), addressing HIPAA-compliant handling of Protected Health Information (PHI) between a covered entity and a business associate.",
+    "filename": "BAA.md",
+    "source_repo": "https://github.com/CommonPaper/BAA"
+  },
+  {
+    "name": "Pilot Agreement",
+    "description": "Common Paper's standard Pilot Agreement, governing time-limited evaluation access to a product ahead of a full commercial engagement, including license scope, restrictions, and termination.",
+    "filename": "Pilot-Agreement.md",
+    "source_repo": "https://github.com/CommonPaper/Pilot-Agreement"
+  },
+  {
+    "name": "AI Addendum",
+    "description": "Common Paper's standard AI Addendum, supplementing a base agreement with terms specific to AI services, including input/output ownership, model training restrictions, and AI-related disclaimers.",
+    "filename": "AI-Addendum.md",
+    "source_repo": "https://github.com/CommonPaper/AI-Addendum"
+  }
+]
