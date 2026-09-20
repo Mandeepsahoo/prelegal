@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { NdaForm } from "@/components/NdaForm";
 import { NdaPreview } from "@/components/NdaPreview";
@@ -19,14 +20,24 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-black">
-      <header className="border-b border-zinc-200 bg-white px-6 py-5 dark:border-zinc-800 dark:bg-zinc-950">
-        <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-          Mutual NDA Creator
-        </h1>
-        <p className="mt-1 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-          Fill in the details below to generate a Common Paper Mutual Non-Disclosure
-          Agreement, then download the completed document.
-        </p>
+      <header className="flex items-start justify-between gap-4 border-b border-zinc-200 bg-white px-6 py-5 dark:border-zinc-800 dark:bg-zinc-950">
+        <div>
+          <h1 className="text-xl font-semibold text-[#032147] dark:text-zinc-50">
+            Mutual NDA Creator
+          </h1>
+          <p className="mt-1 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
+            Fill in the details below to generate a Common Paper Mutual Non-Disclosure
+            Agreement, then download the completed document.
+          </p>
+        </div>
+        <nav className="flex shrink-0 items-center gap-4 pt-1 text-sm">
+          <Link href="/login" className="text-[#209dd7] hover:underline">
+            Log in
+          </Link>
+          <Link href="/signup" className="text-[#209dd7] hover:underline">
+            Sign up
+          </Link>
+        </nav>
       </header>
 
       <main className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 gap-8 px-6 py-8 lg:grid-cols-2">
