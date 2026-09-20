@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .database import init_db
 from .middleware import MaxBodySizeMiddleware
-from .routers import auth, documents, nda
+from .routers import auth, documents, history, nda
 from .static_frontend import build_static_frontend_router
 
 
@@ -31,6 +31,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(nda.router)
 app.include_router(documents.router)
+app.include_router(history.router)
 
 
 @app.get("/api/health")
