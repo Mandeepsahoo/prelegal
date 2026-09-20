@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { NdaForm } from "@/components/NdaForm";
+import { NdaChat } from "@/components/NdaChat";
 import { NdaPreview } from "@/components/NdaPreview";
 import { downloadTextFile, slugify } from "@/lib/nda/download";
 import { buildNdaDocument } from "@/lib/nda/generate";
@@ -26,8 +26,8 @@ export default function Home() {
             Mutual NDA Creator
           </h1>
           <p className="mt-1 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            Fill in the details below to generate a Common Paper Mutual Non-Disclosure
-            Agreement, then download the completed document.
+            Chat with the assistant to fill in the details of a Common Paper Mutual
+            Non-Disclosure Agreement, then download the completed document.
           </p>
         </div>
         <nav className="flex shrink-0 items-center gap-4 pt-1 text-sm">
@@ -42,7 +42,7 @@ export default function Home() {
 
       <main className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 gap-8 px-6 py-8 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <NdaForm value={formData} onChange={setFormData} />
+          <NdaChat fields={formData} onFieldsChange={setFormData} />
         </div>
 
         <div className="flex flex-col gap-4">

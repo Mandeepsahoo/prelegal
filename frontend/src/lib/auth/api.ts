@@ -1,3 +1,5 @@
+import { apiBaseUrl, parseErrorMessage, postJson } from "@/lib/api";
+
 export interface AuthUser {
   id: number;
   email: string;
@@ -12,10 +14,6 @@ export interface AuthResponse {
 
 const TOKEN_STORAGE_KEY = "prelegal_token";
 
-function apiBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
-}
-
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
   return window.localStorage.getItem(TOKEN_STORAGE_KEY);
@@ -29,34 +27,12 @@ export function clearToken(): void {
   window.localStorage.removeItem(TOKEN_STORAGE_KEY);
 }
 
-async function parseErrorMessage(response: Response): Promise<string> {
-  try {
-    const body = await response.json();
-    if (typeof body.detail === "string") return body.detail;
-  } catch {
-    // Response body wasn't JSON; fall through to the generic message below.
-  }
-  return `Request failed with status ${response.status}`;
+export function signup(email: string, password: string): Promise<AuthResponse> {
+  return postJson("/api/auth/signup", { email, password });
 }
 
-export async function signup(email: string, password: string): Promise<AuthResponse> {
-  const response = await fetch(`${apiBaseUrl()}/api/auth/signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-  if (!response.ok) throw new Error(await parseErrorMessage(response));
-  return response.json();
-}
-
-export async function login(email: string, password: string): Promise<AuthResponse> {
-  const response = await fetch(`${apiBaseUrl()}/api/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-  if (!response.ok) throw new Error(await parseErrorMessage(response));
-  return response.json();
+export function login(email: string, password: string): Promise<AuthResponse> {
+  return postJson("/api/auth/login", { email, password });
 }
 
 export async function fetchCurrentUser(token: string): Promise<AuthUser> {

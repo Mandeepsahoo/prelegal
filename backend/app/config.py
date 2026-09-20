@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     database_path: str = str(BACKEND_DIR / "data" / "app.db")
     static_dir: str = str(REPO_ROOT / "frontend" / "out")
     cors_origins: list[str] = ["http://localhost:3000"]
+    openrouter_api_key: str = ""
 
 
 settings = Settings()
