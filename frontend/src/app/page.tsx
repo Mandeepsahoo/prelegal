@@ -1,12 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { DocumentChat } from "@/components/DocumentChat";
 import { DocumentPicker } from "@/components/DocumentPicker";
 import { NdaChat } from "@/components/NdaChat";
 import { NdaPreview } from "@/components/NdaPreview";
+import { SiteHeader } from "@/components/SiteHeader";
 import type { DocumentTypeInfo } from "@/lib/documents/api";
+import { useAuth } from "@/lib/auth/AuthContext";
+import { saveDocumentToHistory } from "@/lib/history/api";
 import { downloadTextFile, slugify } from "@/lib/nda/download";
 import { buildNdaDocument } from "@/lib/nda/generate";
 import { defaultNdaFormData, NdaFormData } from "@/lib/nda/types";
@@ -14,6 +16,7 @@ import { defaultNdaFormData, NdaFormData } from "@/lib/nda/types";
 const GENERIC_PLACEHOLDER_DOCUMENT = "_Your document will appear here as you chat._";
 
 export default function Home() {
+  const { user } = useAuth();
   const [selectedType, setSelectedType] = useState<DocumentTypeInfo | null>(null);
   const [ndaFormData, setNdaFormData] = useState<NdaFormData>(defaultNdaFormData);
   const [genericDocument, setGenericDocument] = useState(GENERIC_PLACEHOLDER_DOCUMENT);
@@ -31,28 +34,23 @@ export default function Home() {
   const handleDownload = () => {
     const slug = (selectedType && slugify(selectedType.name)) || "document";
     downloadTextFile(`${slug}.md`, activeDocument);
+
+    if (user && selectedType) {
+      // Best-effort: the user already has their download, so a failure here
+      // shouldn't surface as an error for an action they didn't explicitly take.
+      saveDocumentToHistory(selectedType.name, selectedType.name, activeDocument).catch(() => {});
+    }
   };
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-black">
-      <header className="flex items-start justify-between gap-4 border-b border-zinc-200 bg-white px-6 py-5 dark:border-zinc-800 dark:bg-zinc-950">
-        <div>
-          <h1 className="text-xl font-semibold text-[#032147] dark:text-zinc-50">Prelegal</h1>
-          <p className="mt-1 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            {selectedType
-              ? `Chat with the assistant to fill in the details of a ${selectedType.name}, then download the completed document.`
-              : "Choose a document type to get started, or describe what you need."}
-          </p>
-        </div>
-        <nav className="flex shrink-0 items-center gap-4 pt-1 text-sm">
-          <Link href="/login" className="text-[#209dd7] hover:underline">
-            Log in
-          </Link>
-          <Link href="/signup" className="text-[#209dd7] hover:underline">
-            Sign up
-          </Link>
-        </nav>
-      </header>
+      <SiteHeader
+        subtitle={
+          selectedType
+            ? `Chat with the assistant to fill in the details of a ${selectedType.name}, then download the completed document.`
+            : "Choose a document type to get started, or describe what you need."
+        }
+      />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">
         {!selectedType ? (
