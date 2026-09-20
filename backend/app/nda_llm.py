@@ -5,6 +5,7 @@ from .nda_schemas import ChatMessage, ChatTurnResult, NdaFields
 
 MODEL = "openrouter/openai/gpt-oss-120b"
 EXTRA_BODY = {"provider": {"order": ["cerebras"]}}
+REQUEST_TIMEOUT_SECONDS = 30
 
 SYSTEM_PROMPT = """You are an assistant helping a user fill out a Common Paper Mutual \
 Non-Disclosure Agreement (NDA) through natural conversation.
@@ -64,6 +65,7 @@ def generate_chat_turn(messages: list[ChatMessage], current_fields: NdaFields) -
             reasoning_effort="low",
             extra_body=EXTRA_BODY,
             api_key=settings.openrouter_api_key,
+            timeout=REQUEST_TIMEOUT_SECONDS,
         )
     except Exception as exc:  # litellm raises a variety of provider-specific errors
         raise LlmError("Failed to reach the AI assistant.") from exc
