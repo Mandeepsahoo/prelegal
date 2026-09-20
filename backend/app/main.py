@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .config import settings
 from .database import init_db
+from .middleware import MaxBodySizeMiddleware
 from .routers import auth, nda
 from .static_frontend import build_static_frontend_router
 
@@ -18,6 +19,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Prelegal API", lifespan=lifespan)
 
+app.add_middleware(MaxBodySizeMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
