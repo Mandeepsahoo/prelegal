@@ -1,6 +1,12 @@
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+# Caps on chat request size — this endpoint triggers a real, paid LLM call per
+# request with no auth in front of it (see PL-4), so unbounded input would let
+# a single caller drive arbitrarily large API costs.
+MAX_MESSAGES_PER_REQUEST = 40
+MAX_MESSAGE_LENGTH = 4000
 
 _STRING_FIELDS = (
     "purpose",
@@ -55,11 +61,11 @@ class ChatTurnResult(BaseModel):
 
 class ChatMessage(BaseModel):
     role: Literal["user", "assistant"]
-    content: str
+    content: str = Field(max_length=MAX_MESSAGE_LENGTH)
 
 
 class NdaChatRequest(BaseModel):
-    messages: list[ChatMessage]
+    messages: list[ChatMessage] = Field(max_length=MAX_MESSAGES_PER_REQUEST)
     fields: NdaFields
 
 

@@ -111,3 +111,33 @@ def test_chat_returns_502_on_malformed_llm_response(client, monkeypatch: pytest.
     )
 
     assert response.status_code == 502
+
+
+def test_chat_rejects_oversized_message_content(client):
+    response = client.post(
+        "/api/nda/chat",
+        json={"messages": [{"role": "user", "content": "x" * 5000}], "fields": {}},
+    )
+
+    assert response.status_code == 422
+
+
+def test_chat_rejects_too_many_messages(client):
+    messages = [{"role": "user", "content": "hi"} for _ in range(41)]
+
+    response = client.post("/api/nda/chat", json={"messages": messages, "fields": {}})
+
+    assert response.status_code == 422
+
+
+def test_chat_rate_limits_after_too_many_requests(client, monkeypatch: pytest.MonkeyPatch):
+    reply_payload = {"reply": "ok", "fields": {}, "is_complete": False}
+    monkeypatch.setattr(nda_llm, "completion", _fake_completion(json.dumps(reply_payload)))
+
+    body = {"messages": [{"role": "user", "content": "hi"}], "fields": {}}
+    for _ in range(20):
+        response = client.post("/api/nda/chat", json=body)
+        assert response.status_code == 200
+
+    response = client.post("/api/nda/chat", json=body)
+    assert response.status_code == 429
