@@ -16,12 +16,15 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from app.database import engine  # noqa: E402
 from app.main import app  # noqa: E402
+from app.routers import documents as documents_router  # noqa: E402
 from app.routers.nda import chat_rate_limit  # noqa: E402
 
 
 @pytest.fixture()
 def client():
     chat_rate_limit.reset_for_tests()
+    documents_router.chat_rate_limit.reset_for_tests()
+    documents_router.classify_rate_limit.reset_for_tests()
     with TestClient(app) as test_client:
         yield test_client
 
