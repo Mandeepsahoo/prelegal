@@ -8,6 +8,8 @@
 
 export const COVER_PAGE_TEMPLATE = `# Mutual Non-Disclosure Agreement
 
+*This document is a draft generated for convenience and is not legal advice. It should be reviewed by a qualified attorney before use.*
+
 This Mutual Non-Disclosure Agreement (the "MNDA") consists of: (1) this Cover Page ("**Cover Page**") and (2) the Common Paper Mutual NDA Standard Terms Version 1.0 ("**Standard Terms**") identical to those posted at [commonpaper.com/standards/mutual-nda/1.0](https://commonpaper.com/standards/mutual-nda/1.0). Any modifications of the Standard Terms should be made on the Cover Page, which will control over conflicts with the Standard Terms.
 
 ### Purpose
